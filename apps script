@@ -1,0 +1,10 @@
+function doGet() {
+var firstThread = GmailApp.getInboxThreads(0,1)[0]
+;  var message = firstThread.getMessages()[0];
+var attach = message.getAttachments();
+var body = message.getBody();//is a string  var htmlfile = DriveApp.createFile('body.html', body, "text/html");
+var bodydocpdf = htmlfile.getAs('application/pdf').getBytes();
+DriveApp.createFile(htmlfile.getAs('application/pdf'));
+htmlfile.setTrashed(true);
+return ContentService.createTextOutput("Done - Check your drive");
+}
